@@ -3,6 +3,8 @@ package com.mydawapharm.mydawa.service;
 import com.mydawapharm.mydawa.model.Medicine;
 import com.mydawapharm.mydawa.repository.MedicineRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class MedicineService implements MedicineServiceInterface{
         return repository.findById(id).orElse(null);
     }
     @Override
-    public Medicine createNewMedicineItem(Medicine medicine,Long id){
+    public Medicine createNewMedicineItem(@RequestBody Medicine medicine, @RequestParam Long id){
         if(repository.findById(id).isEmpty()){
             throw new RuntimeException("item already exists");
         }
