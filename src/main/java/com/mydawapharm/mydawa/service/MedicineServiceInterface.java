@@ -12,6 +12,7 @@ public interface MedicineServiceInterface {
     Medicine getMedicineById(Long id);
     Medicine createNewMedicineItem(Medicine medicine,Long id);
     Medicine updateMedicine(Medicine medicine,Long id);
+    List<Medicine> getMedicineByBrand(String brand);
     void deleteAllMedicine();
     void deleteMedicineById(Long id);
 }

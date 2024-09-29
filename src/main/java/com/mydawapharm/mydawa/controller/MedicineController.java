@@ -19,13 +19,30 @@ public class MedicineController {
     public ResponseEntity<List<Medicine>>  getAllMedicine(){
         return new ResponseEntity<>(service.getAllMedicine(), HttpStatus.OK);
     }
+    @GetMapping("/get/purpose")
+    public ResponseEntity<List<Medicine>> getMedicineByPurpose(@RequestParam String purpose){
+        return new ResponseEntity<>(service.getMedicineByPurpose(purpose),HttpStatus.OK);
+
+    }
+    @GetMapping("/get/category")
+    public ResponseEntity<List<Medicine>>getMedicineByCategory( @RequestParam String category){
+        return new ResponseEntity<>(service.getMedicineByCategory(category),HttpStatus.OK);
+    }
+    @GetMapping("/get/name")
+    public ResponseEntity<List<Medicine>> getMedicineByName(@RequestParam String name){
+        return new ResponseEntity<>(service.getMedicineByName(name),HttpStatus.OK);
+    }
     @GetMapping("/get-medicine-by-id")
     public ResponseEntity<Medicine> getMedicineById(@RequestParam Long id){
         return new ResponseEntity<>(service.getMedicineById(id),HttpStatus.OK) ;
     }
+    @GetMapping("/get/brand")
+    public ResponseEntity<List<Medicine>> getMedicineByBrand(@RequestParam String brand){
+        return new ResponseEntity<>(service.getMedicineByBrand(brand),HttpStatus.OK);
+    }
     @PostMapping("/add/new-medicine")
     public ResponseEntity<Medicine> createNewMedicineItem(@RequestBody Medicine medicine,@RequestParam Long id){
-        return new ResponseEntity<>(service.createNewMedicineItem(medicine,id),HttpStatus.OK) ;
+        return new ResponseEntity<>(service.createNewMedicineItem(medicine,id),HttpStatus.CREATED) ;
 
     }
     @PutMapping("/update-item")

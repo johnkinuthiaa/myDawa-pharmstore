@@ -3,8 +3,6 @@ package com.mydawapharm.mydawa.service;
 import com.mydawapharm.mydawa.model.Medicine;
 import com.mydawapharm.mydawa.repository.MedicineRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,20 +22,20 @@ public class MedicineService implements MedicineServiceInterface{
     public List<Medicine> getMedicineByPurpose(String purpose){
         return repository.findAll().stream()
                 .filter(medicine ->medicine.getPurpose().toLowerCase().contains(purpose.toLowerCase()))
-                .toList();
+                .collect(Collectors.toList());
     }
     @Override
     public List<Medicine> getMedicineByCategory(String category) {
         return repository.findAll().stream()
                 .filter(medicine -> medicine.getCategory().toLowerCase().contains(category.toLowerCase()))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Medicine> getMedicineByName(String name) {
         return repository.findAll().stream()
                 .filter(medicine -> medicine.getMedicineName().toLowerCase().contains(name.toLowerCase()))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -48,8 +46,14 @@ public class MedicineService implements MedicineServiceInterface{
         return repository.findById(id).orElse(null);
     }
     @Override
+    public List<Medicine> getMedicineByBrand(String brand){
+        return repository.findAll().stream()
+                .filter(medicine ->medicine.getBrand().toLowerCase().contains(brand.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+    @Override
     public Medicine createNewMedicineItem(Medicine medicine,Long id){
-        if(repository.findById(id).isEmpty()){
+        if(repository.findById(id).isPresent()){
             throw new RuntimeException("item already exists");
         }
         return repository.save(medicine);
